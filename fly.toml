@@ -18,7 +18,7 @@
 #     fly secrets set ANTHROPIC_API_KEY="..."
 #     fly secrets set QUIZ_TIME_1="10:00" QUIZ_TIME_2="13:30" QUIZ_TIME_3="18:00"
 
-app = "REPLACE-ME-WITH-YOUR-FLY-APP-NAME"
+app = "de-skill-bot-abhi"
 primary_region = "lhr"
 
 [build]
