@@ -1,33 +1,25 @@
-# fly.io configuration for the DE Quiz Telegram bot.
+# fly.toml app configuration file generated for de-skill-bot on 2026-05-15T23:48:33Z
 #
-# IMPORTANT: this is a long-polling Telegram bot, not an HTTP service.
-#  - There is NO [http_service] block — fly will not try to route HTTP traffic.
-#  - The bot MUST run as exactly ONE machine. Telegram only allows one
-#    `getUpdates` poller per bot token; multiple machines will fight and
-#    every one of them will fail with "Conflict: terminated by other
-#    getUpdates request" (we hit this during local dev).
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
-# After deploy, ensure single-instance with:
-#     fly scale count 1
-#
-# Set secrets BEFORE first deploy (do NOT bake them into the image):
-#     fly secrets set TELEGRAM_BOT_TOKEN="..."
-#     fly secrets set TELEGRAM_USER_ID="..."
-#     fly secrets set SUPABASE_URL="..."
-#     fly secrets set SUPABASE_KEY="..."
-#     fly secrets set ANTHROPIC_API_KEY="..."
-#     fly secrets set QUIZ_TIME_1="10:00" QUIZ_TIME_2="13:30" QUIZ_TIME_3="18:00"
 
-app = "de-skill-bot-abhi"
-primary_region = "lhr"
+app = 'de-skill-bot'
+primary_region = 'lhr'
 
 [build]
-  # Uses the Dockerfile in this directory.
 
 [deploy]
-  strategy = "immediate"
+  strategy = 'immediate'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 256
