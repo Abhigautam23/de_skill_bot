@@ -5,6 +5,9 @@
 *.pem
 *.key
 
+# --- Local user preferences (mode + scheduled-push rotation counter) ---
+user_prefs.json
+
 # --- Python ---
 __pycache__/
 *.py[cod]
